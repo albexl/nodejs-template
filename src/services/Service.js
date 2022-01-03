@@ -10,13 +10,17 @@ class Service {
   }
 
   async getAll(query) {
-    let { skip, limit } = query;
+    let { skip, limit, sortBy, orderBy } = query;
 
     skip = skip ? Number(skip) : 0;
     limit = limit ? Number(limit) : 10;
+    let sort = {};
+
+    if (sortBy && orderBy) sort[sortBy] = orderBy === "desc" ? -1 : +1;
 
     delete query.skip;
     delete query.limit;
+    delete query.sort;
 
     if (query._id) {
       try {
@@ -27,7 +31,11 @@ class Service {
     }
 
     try {
-      let items = await this.model.find(query).skip(skip).limit(limit);
+      let items = await this.model
+        .find(query)
+        .sort(sort)
+        .skip(skip)
+        .limit(limit);
       let total = await this.model.count();
 
       return {
