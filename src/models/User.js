@@ -34,7 +34,7 @@ class User {
 
   getInstance() {
     this.initSchema();
-    return mongoose.model("post");
+    return mongoose.model("user");
   }
 }
 
