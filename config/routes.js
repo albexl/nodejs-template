@@ -3,6 +3,7 @@ import CommentController from "./../src/controllers/CommentController";
 
 export default (server) => {
   // POST ROUTES
+
   server.get(`/api/posts`, PostController.getAll);
   server.post(`/api/posts`, PostController.insert);
   server.patch(`/api/posts/:id`, PostController.update);
