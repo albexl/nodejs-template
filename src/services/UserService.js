@@ -1,9 +1,9 @@
 import Service from "./Service";
 
-class CommentService extends Service {
+class UserService extends Service {
   constructor(model) {
     super(model);
   }
 }
 
-export default CommentService;
+export default UserService;

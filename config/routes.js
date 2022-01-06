@@ -1,9 +1,9 @@
 import PostController from "./../src/controllers/PostController";
 import CommentController from "./../src/controllers/CommentController";
+import UserController from "./../src/controllers/UserController";
 
 export default (server) => {
   // POST ROUTES
-
   server.get(`/api/posts`, PostController.getAll);
   server.post(`/api/posts`, PostController.insert);
   server.patch(`/api/posts/:id`, PostController.update);
@@ -14,4 +14,10 @@ export default (server) => {
   server.post(`/api/comments`, CommentController.insert);
   server.patch(`/api/comments/:id`, CommentController.update);
   server.delete(`/api/comments/:id`, CommentController.delete);
+
+  // USER ROUTES
+  server.get(`/api/users`, UserController.getAll);
+  server.post(`/api/users`, UserController.insert);
+  server.patch(`/api/users/:id`, UserController.update);
+  server.delete(`/api/users/:id`, UserController.delete);
 };
