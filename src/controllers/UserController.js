@@ -42,7 +42,38 @@ class UserController extends Controller {
 
       user.token = token;
 
-      res.status(201).json(user);
+      res.status(201).send(user);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  async login(req, res) {
+    try {
+      const { email, password } = req.body;
+
+      if (!(email && password)) {
+        res.status(400).send("All input is required");
+      }
+
+      const users = await userService.getAll({ email: email });
+
+      if (
+        users.data.length > 0 &&
+        (await bcrypt.compare(password, users.data[0].password))
+      ) {
+        const token = jwt.sign(
+          { user_id: users.data[0]._id, email },
+          "2RANDOM*STRING6",
+          {
+            expiresIn: "2h",
+          }
+        );
+
+        users.data[0].token = token;
+
+        res.status(200).send(users.data[0]);
+      } else res.status(400).send("Invalid Credentials");
     } catch (err) {
       console.log(err);
     }
