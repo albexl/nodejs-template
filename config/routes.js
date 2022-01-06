@@ -20,4 +20,5 @@ export default (server) => {
   server.post(`/api/users`, UserController.insert);
   server.patch(`/api/users/:id`, UserController.update);
   server.delete(`/api/users/:id`, UserController.delete);
+  server.post(`/api/register`, UserController.register);
 };
