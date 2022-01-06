@@ -1,10 +1,11 @@
 import PostController from "./../src/controllers/PostController";
 import CommentController from "./../src/controllers/CommentController";
 import UserController from "./../src/controllers/UserController";
+const auth = require("./../middleware/auth");
 
 export default (server) => {
   // POST ROUTES
-  server.get(`/api/posts`, PostController.getAll);
+  server.get(`/api/posts`, auth, PostController.getAll);
   server.post(`/api/posts`, PostController.insert);
   server.patch(`/api/posts/:id`, PostController.update);
   server.delete(`/api/posts/:id`, PostController.delete);
