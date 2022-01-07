@@ -10,9 +10,9 @@ class Comment {
           required: true,
         },
         postId: {
-            type: String,
-            required: true
-        }
+          type: String,
+          required: true,
+        },
       },
       { timestamps: true }
     );
